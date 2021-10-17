@@ -354,6 +354,12 @@ ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name end
 # -----------------------------------------------------------------------------
 #   6.  NETWORKING
 # -----------------------------------------------------------------------------
+# - https://unix.stackexchange.com/questions/22615/how-can-i-get-my-external-ip-address-in-a-shell-script
+# - https://coderwall.com/p/lyrjsq/extract-your-external-ip-using-command-line-tools
+# -----------------------------------------------------------------------------
+    alias wanip='dig @resolver4.opendns.com myip.opendns.com +short' 
+    alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
+    alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
     alias myip='curl ifconfig.me/ip'                    # myip:         Public facing IP Address
     alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
     alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
