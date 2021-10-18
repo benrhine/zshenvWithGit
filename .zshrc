@@ -94,7 +94,117 @@
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # recommended themes - jonathan, robbyrussell, agnoster
-ZSH_THEME="jonathan"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# https://gist.github.com/cviebrock/985684a169cf9a2b117d99dd9415a448
+# General
+POWERLEVEL9K_MODE="nerdfont-complete"
+#POWERLEVEL9K_COLOR_SCHEME='dark'
+POWERLEVEL9K_DATE_FORMAT="%D{%m/%d/%y}"
+
+#POWERLEVEL9K_TIME_FORMAT="%D{\uf017 %H:%M \uf073 %d/%m/%y}"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
+
+# POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_LEFT_PROMPT_CONTEXT_FOREGROUND='008'
+#POWERLEVEL9K_DIR_BACKGROUND='117'
+#POWERLEVEL9K_VCS_BACKGROUND='008'
+POWERLEVEL9K_DISABLE_RPROMPT=false
+
+# POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="zsh_wifi_signal"
+
+# function zsh_wifi_signal(){
+#         local output=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I)
+#         local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
+
+#         if [ "$airport" = "Off" ]; then
+#                 local color='%F{black}'
+#                 echo -n "%{$color%}Wifi Off"
+#         else
+#                 local ssid=$(echo $output | grep ' SSID' | awk -F': ' '{print $2}')
+#                 local speed=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
+#                 local color='%F{black}'
+
+#                 [[ $speed -gt 100 ]] && color='%F{black}'
+#                 [[ $speed -lt 50 ]] && color='%F{red}'
+
+#                 echo -n "%{$color%}$speed Mbps \uf1eb%{%f%}" # removed char not in my PowerLine font
+#         fi
+# }
+
+# Prompts
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon time context battery dir virtualenv vcs)
+else
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon time root_indicator context battery dir virtualenv vcs)
+fi
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status date dir_writable public_ip ram load background_jobs newline java_version) 
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\ue0b0'
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\ue0b2'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭"
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰\uF460\uF460\uF460 "
+
+# Dir segment
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_DELIMITER=…
+#POWERLEVEL9K_DIR_PATH_SEPARATOR="%F{grey}\/%F{white}"
+#POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='241'
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
+POWERLEVEL9K_DIR_HOME_BACKGROUND='241'
+POWERLEVEL9K_DIR_HOME_FOREGROUND='white'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='241'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='white'
+
+# Custom segment "now playing"
+#POWERLEVEL9K_CUSTOM_NOW_PLAYING='~/.dotfiles/bin/nowplaying'
+#POWERLEVEL9K_CUSTOM_NOW_PLAYING_BACKGROUND='blue'
+#POWERLEVEL9K_CUSTOM_NOW_PLAYING_FOREGROUND='black'
+
+# Root segment
+POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND='red'
+POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND='black'
+POWERLEVEL9K_ROOT_ICON="\uf21b"
+
+# Status segment
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
+POWERLEVEL9K_STATUS_OK_BACKGROUND='black'
+POWERLEVEL9K_STATUS_OK_FOREGROUND='236'
+POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_COLOR='010'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND='black'
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND='236'
+POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_COLOR='red'
+
+# Background jobs segment
+POWERLEVEL9K_BACKGROUND_JOBS_ICON="\uf423"
+
+# Battery segment
+POWERLEVEL9K_BATTERY_CHARGING='107'
+POWERLEVEL9K_BATTERY_CHARGED='blue'
+POWERLEVEL9K_BATTERY_LOW_THRESHOLD='50'
+POWERLEVEL9K_BATTERY_LOW_COLOR='red'
+
+# VCS segment
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='239'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='010'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='239'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+# POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='239'
+# POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='red'
+
+# SSH segment
+POWERLEVEL9K_SSH_BACKGROUND='blue'
+POWERLEVEL9K_SSH_FOREGROUND='white'
+
+# Context segment
+POWERLEVEL9K_CONTEXT_TEMPLATE="\uf109 %m"
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='white'
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='blue'
+POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND='white'
+POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND='red'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -149,14 +259,19 @@ ZSH_THEME="jonathan"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-sdkman
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -425,7 +540,7 @@ function reloadZsh() {
     source ~/.zshrc
 }
 
-function reloadZsh() {
+function reloadBash() {
     source ~/.bash_profile
 }
 
@@ -449,6 +564,22 @@ function cleanbuild() {
 function publish() {
     cleanlock
     ./gradlew clean build uploadArchives
+}
+
+function listfunc() {
+    echo "List of custom terminal commands"
+    echo "reloadZsh"
+    echo "reloadBash"
+    echo "removeFromPath"
+    echo "cleanlock"
+    echo "cleanlockproject"
+    echo "cleanbuild"
+    echo "publish"
+}
+
+function cmdhelp() {
+    echo "Reminder of how to do certain functions"
+    echo "TODO"
 }
 
 # -----------------------------------------------------------------------------
@@ -522,6 +653,8 @@ function publish() {
     function removeFromPath() {
         export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
     }
+
+source $(dirname $(gem which colorls))/tab_complete.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
