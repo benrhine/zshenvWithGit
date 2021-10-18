@@ -34,7 +34,7 @@
     export USR_LOCAL_GIT=/usr/local/git
     export M2_HOME=$HOME/.sdkman/candidates/maven/current
     export M2=$M2_HOME/bin
-    export MAVEN_OPTS=-Xms256m -Xmx512m
+#    export MAVEN_OPTS=-Xms256m -Xmx512m
     export GRADLE_HOME=$HOME/.sdkman/candidates/gradle/current
 
     # Configure path
