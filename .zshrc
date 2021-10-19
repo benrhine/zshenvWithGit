@@ -654,7 +654,8 @@ function cmdhelp() {
         export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
     }
 
-source $(dirname $(gem which colorls))/tab_complete.sh
+# for colorls - currently does not work
+#source $(dirname $(gem which colorls))/tab_complete.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
