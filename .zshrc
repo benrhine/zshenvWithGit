@@ -561,9 +561,34 @@ function cleanbuild() {
     ./gradlew clean build
 }
 
+function cleantest() {
+    cleanlock
+    cleanlockproject
+    ./gradlew clean test
+}
+
 function publish() {
     cleanlock
-    ./gradlew clean build uploadArchives
+    cleanlockproject
+    ./gradlew clean build uploadArchives --info
+}
+
+function uploadArchives() {
+    cleanlock
+    cleanlockproject
+    ./gradlew uploadArchives --info
+}
+
+function build() {
+    cleanlock
+    cleanlockproject
+    ./gradlew build
+}
+
+function bootRun() {
+    cleanlock
+    cleanlockproject
+    ./gradlew bootRun
 }
 
 function listfunc() {
@@ -581,6 +606,19 @@ function cmdhelp() {
     echo "Reminder of how to do certain functions"
     echo "TODO"
 }
+
+function env() {
+    printenv
+}
+
+alias cc='cleanlock; cleanlockproject'
+alias cl='cleanlock'
+alias clp='cleanlockproject'
+alias cb='cleanbuild'
+alias ct='cleantest'
+alias up='uploadArchives'
+alias b='build'
+alias br='bootRun'
 
 # -----------------------------------------------------------------------------
 #   10.  REMINDERS & NOTES
