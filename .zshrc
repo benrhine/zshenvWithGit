@@ -43,6 +43,41 @@
     export PATH="$GRADLE_HOME/bin:$PATH"
     export PATH="$USR_LOCAL_GIT/bin:/sw/bin/:$USR_LOCAL/bin:/usr/local/:$USR_LOCAL_SBIN:$USR_LOCAL_MYSQL/bin:$PATH"
 
+export GITHUB_ACTOR=benrhine
+export GITHUB_TOKEN=
+export SLACK_WEBHOOK=
+export SLACK_UPLOAD=https://slack.com/api/files.upload
+export SLACK_TOKEN=
+
+# Update Aug 2025
+export github_pat_2025=
+
+export AWS_SDK_LOAD_CONFIG=1
+#  infraweave specific
+# export AWS_REGION=us-east-2
+# export AWS_PROFILE=brr-tools-admin
+# export RUST_BACKTRACE=1
+
+
+# In theory these will be terminal specific only when the ollama command is invoked
+# this should allow my paid claud account to live with my free claude code
+export PROMPT_COMMAND='if [ "$PS4" = "+ ollama " ]; then \
+    export ANTHROPIC_AUTH_TOKEN="ollama"; \
+    export ANTHROPIC_API_KEY=""; \
+    export ANTHROPIC_BASE_URL="http://localhost:11434"; \
+fi'
+
+
+# -----------------------------------------------------------------------------
+# Set Job site credentials for Claude
+# -----------------------------------------------------------------------------
+export LINKEDIN_EMAIL="rhine.ben@gmail.com"                                                                                                                                                            
+export LINKEDIN_PASSWORD=""      
+export INDEED_EMAIL="rhine.ben@gmail.com"  
+export INDEED_PASSWORD=""
+export HIRINGCAFE_EMAIL="rhine.ben@gmail.com"
+export HIRINGCAFE_PASSWORD=""  
+
 # -----------------------------------------------------------------------------
 # Set Default Editor (change 'Nano' to the editor of your choice)
 # -----------------------------------------------------------------------------
@@ -695,8 +730,9 @@ alias br='bootRun'
 # for colorls - currently does not work
 #source $(dirname $(gem which colorls))/tab_complete.sh
 
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+# I dont think these are valid anymore
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
